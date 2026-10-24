@@ -21,11 +21,11 @@ class LocalBusinessScraper:
         self,
         search_queue=None,
         location=None,
-        headless=False,
+        headless=True,
         phone_prefix="",
         visit_website=True,
         parallel=True,
-        concurrency=3,
+        concurrency=2,
         max_leads_per_task=0,
         size_filter="all",
         tasks=None
@@ -38,10 +38,11 @@ class LocalBusinessScraper:
             loc = location or "Delhi, India"
             self.search_queue = [{"keyword": "zym", "location": loc, "country": "India", "phone_prefix": phone_prefix}]
 
-        self.headless = headless
+        # Render jaise cloud server par hamesha headless=True rakhein
+        self.headless = True
         self.visit_website = visit_website
         self.parallel = parallel
-        self.concurrency = max(1, int(concurrency or 3))
+        self.concurrency = max(1, int(concurrency or 2))
         self.max_leads_per_task = int(max_leads_per_task or 0)
         self.size_filter = (size_filter or "all").strip().lower()
         self.stop_requested = False
@@ -165,10 +166,6 @@ class LocalBusinessScraper:
         return False
 
     def classify_business_size(self, name, category, reviews_count, has_website, web_scale_score=0):
-        """
-        Determines whether a business (e.g., Hospital, Gym, Store, Company) is Large, Medium, or Small
-        based on Google Reviews count, Name/Category keywords, Website presence, and Website scale signals.
-        """
         text_check = f"{name} {category}".lower()
 
         large_keywords = [
@@ -189,7 +186,6 @@ class LocalBusinessScraper:
         is_large_kw = any(k in text_check for k in large_keywords)
         is_small_kw = any(k in text_check for k in small_keywords)
 
-        # Scoring logic
         score = 0
         if reviews_count >= 300:
             score += 4
@@ -263,7 +259,6 @@ class LocalBusinessScraper:
                 except:
                     pass
 
-            # Smoothly slide/scroll down to load lazy footers & contact widgets
             try:
                 for _ in range(3):
                     new_tab.evaluate("window.scrollBy(0, Math.max(800, document.body.scrollHeight / 3))")
@@ -284,7 +279,6 @@ class LocalBusinessScraper:
                 combined = (h_text or "") + "\n" + (b_text or "")
                 low_body = (b_text or "").lower()
 
-                # Check scale indicators on website (beds, branches, doctors, locations)
                 scale_terms = ['branches', 'our locations', 'beds', 'icu', '24/7 emergency', 'specialists', 'our doctors', 'franchise', 'global presence', 'iso 9001']
                 hits = sum(1 for term in scale_terms if term in low_body)
                 if hits >= 2:
@@ -292,14 +286,12 @@ class LocalBusinessScraper:
                 elif hits == 1:
                     web_scale_score = max(web_scale_score, 1)
 
-                # Extract Clean Emails
                 for e in re.findall(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', combined):
                     e_low = e.lower()
                     if not e_low.endswith(('.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.css', '.js', '.woff')) and not any(j in e_low for j in ['sentry.io', 'wixpress', 'example.com', 'domain.com', 'email.com', 'yoursite.com']):
                         if e_low not in found_emails:
                             found_emails.append(e_low)
 
-                # Extract Phone Numbers from text & format with Country Code
                 phone_patterns = re.findall(r'(?:\+?\d{1,3}[-.\s]?)?\(?\d{2,4}\)?[-.\s]?\d{3,5}[-.\s]?\d{4,6}', b_text or "")
                 for p in phone_patterns:
                     digits_only = re.sub(r'\D', '', p)
@@ -329,7 +321,6 @@ class LocalBusinessScraper:
                             if clean_soc not in found_socials:
                                 found_socials.append(clean_soc)
 
-                        # Extract WhatsApp number from wa.me link if present
                         wa_match = re.search(r'(?:wa\.me/|phone=)(\+?\d{8,14})', href_low)
                         if wa_match:
                             wa_num = self.format_phone_with_country_code(wa_match.group(1), country_name)
@@ -339,7 +330,6 @@ class LocalBusinessScraper:
             if html_content:
                 parse_text_and_html(html_content, body_text)
 
-            # Find and navigate to "Contact Us" or "About Us" pages
             soup = BeautifulSoup(html_content, 'html.parser') if html_content else None
             if soup:
                 sub_links = []
@@ -460,7 +450,6 @@ class LocalBusinessScraper:
                     }
                 }
 
-                // Extract Rating and Reviews Count for Business Size Calculation
                 let rating = "N/A";
                 let reviewsCount = 0;
                 const ratingBox = document.querySelector('div.F7nice');
@@ -512,7 +501,6 @@ class LocalBusinessScraper:
             else:
                 final_website = "N/A" if not has_website else final_website
 
-            # Determine Business Size (Large / Medium / Small)
             business_size = self.classify_business_size(
                 final_name,
                 task_meta["keyword"],
@@ -521,7 +509,6 @@ class LocalBusinessScraper:
                 web_scale_score
             )
 
-            # Filter by size if user selected a specific size filter
             if not self.matches_size_filter(business_size, task_meta.get("size_filter", "all")):
                 print(f"    [-] [SKIPPED - Size Mismatch ({business_size})] {final_name}")
                 return
@@ -572,15 +559,36 @@ class LocalBusinessScraper:
             query = f"{task_meta['keyword']} in {task_meta['location']}"
             max_leads = task_meta.get("max_leads", 0)
 
-           with sync_playwright() as p: # <-- Line 575 (8 spaces)
-            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"]) # <-- Line 576 (12 spaces - 'with' se 4 space aage)
-            page = browser.new_page() # <-- Line 577 (12 spaces - browser ke bilkul barabar)
+            with sync_playwright() as p:
+                browser = p.chromium.launch(
+                    headless=True,
+                    args=[
+                        '--disable-blink-features=AutomationControlled',
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                        '--disable-dev-shm-usage',
+                        '--disable-gpu',
+                        '--no-first-run',
+                        '--no-zygote'
+                    ]
+                )
+                context = browser.new_context(
+                    user_agent=self.get_random_ua(),
+                    viewport={'width': 1280, 'height': 720}
+                )
+                context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+                page = context.new_page()
+
                 processed_hrefs = set()
                 search_url = f"https://www.google.com/maps/search/{query.replace(' ', '+')}?hl=en"
 
                 try:
                     page.goto(search_url, timeout=45000)
                 except:
+                    try:
+                        browser.close()
+                    except:
+                        pass
                     task_meta["status"] = "completed"
                     return
 
@@ -693,10 +701,8 @@ class LocalBusinessScraper:
             "Address": "N/A"
         }]
 
-        # Save Excel (.xlsx)
         pd.DataFrame(clean_rows).to_excel(f"{base_filepath}.xlsx", index=False)
 
-        # Save PDF (.pdf)
         pdf_path = f"{base_filepath}.pdf"
         doc = SimpleDocTemplate(pdf_path, pagesize=landscape(letter), leftMargin=15, rightMargin=15, topMargin=18, bottomMargin=18)
         elements = []
@@ -735,12 +741,10 @@ class LocalBusinessScraper:
         doc.build(elements)
 
     def generate_reports(self, base_dir):
-        # 1. Master Combined Reports (Excel + PDF)
         self._export_excel_and_pdf(self.results, os.path.join(base_dir, "leads_all"), "Master Report: All Scraped Businesses", "#4f46e5")
         self._export_excel_and_pdf(self.with_website, os.path.join(base_dir, "leads_with_website"), "Master Report: Businesses WITH Website", "#059669")
         self._export_excel_and_pdf(self.without_website, os.path.join(base_dir, "leads_without_website"), "Master Report: Businesses WITHOUT Website", "#e11d48")
 
-        # 2. Individual Per-Task Reports (Excel + PDF for every single queued business & country)
         for t in self.tasks_meta:
             tid = t["task_id"]
             label = f"{t['keyword']} in {t['location']}"
