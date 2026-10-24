@@ -573,10 +573,10 @@ class LocalBusinessScraper:
             max_leads = task_meta.get("max_leads", 0)
 
             with sync_playwright() as p:
-                browser = p.chromium.launch(
-                    headless=self.headless,
-                    args=['--disable-blink-features=AutomationControlled', '--no-sandbox', '--disable-dev-shm-usage']
-                )
+browser = p.chromium.launch(
+    headless=True,
+    args=["--no-sandbox", "--disable-dev-shm-usage"]
+)
                 context = browser.new_context(user_agent=self.get_random_ua(), viewport={'width': 1280, 'height': 720})
                 context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
                 page = context.new_page()
