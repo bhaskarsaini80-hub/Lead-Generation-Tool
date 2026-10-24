@@ -572,12 +572,9 @@ class LocalBusinessScraper:
             query = f"{task_meta['keyword']} in {task_meta['location']}"
             max_leads = task_meta.get("max_leads", 0)
 
-            with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
-                context = browser.new_context(user_agent=self.get_random_ua(), viewport={'width': 1280, 'height': 720})
-                context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-                page = context.new_page()
-
+           with sync_playwright() as p: # <-- Line 575 (8 spaces)
+            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"]) # <-- Line 576 (12 spaces - 'with' se 4 space aage)
+            page = browser.new_page() # <-- Line 577 (12 spaces - browser ke bilkul barabar)
                 processed_hrefs = set()
                 search_url = f"https://www.google.com/maps/search/{query.replace(' ', '+')}?hl=en"
 
