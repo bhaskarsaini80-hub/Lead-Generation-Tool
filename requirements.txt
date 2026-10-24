@@ -7,4 +7,3 @@ requests>=2.31.0
 fake-useragent>=1.5.1
 gunicorn
 pandas
-playwright install
