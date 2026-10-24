@@ -15,4 +15,4 @@ RUN playwright install chromium
 COPY . .
 
 # ऐप को रन करें
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:10000"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:10000", "--workers", "1", "--threads", "4", "--timeout", "120"]
