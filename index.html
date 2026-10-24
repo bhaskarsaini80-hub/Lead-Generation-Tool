@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalFinder - Global Local Business Search & Unlimited Python Lead Scraper</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- Top Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl font-bold tracking-tight text-slate-900">LocalFinder</h1>
+            <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded-full">Global + Smart Size Scraper</span>
+          </div>
+          <p class="text-xs text-slate-500 hidden sm:block">Automated Google & Maps Search Engine + Unlimited Python Lead, Website & Business Size Checker</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <span class="hidden md:inline-flex items-center text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+          197 Countries • Large/Medium/Small Detector
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow w-full space-y-8">
+
+    <!-- Search Hero Card -->
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-500 px-6 py-6 text-white">
+        <span class="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+          Automated Search Generator
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+          Find Any Local Business in Any Major City Worldwide
+        </h2>
+        <p class="text-blue-100 text-sm mt-1">
+          Select a Country, pick a Major City (e.g. <span class="font-bold text-white underline">Delhi</span>), and a Category (e.g. <span class="font-bold text-white underline">zym</span>) — searches <span class="bg-black/20 px-2 py-0.5 rounded font-mono font-bold text-amber-300">zym in delhi in india</span> in 1 click!
+        </p>
+      </div>
+
+      <!-- Search Configuration Form -->
+      <form id="search-form" class="p-6 sm:p-8 space-y-6" target="_blank" action="https://www.google.com/search" method="GET">
+        <input type="hidden" name="q" id="google-search-param" value="zym in delhi in india">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- 1. Country Selection -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label for="country-select" class="text-sm font-bold text-slate-800 flex items-center">
+                <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mr-2">1</span>
+                Select Country
+              </label>
+              <span class="text-xs text-slate-400">197 countries</span>
+            </div>
+
+            <input type="text" id="country-filter-input" placeholder="🔍 Type to filter country (e.g. India, Paraguay)..."
+              class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus:bg-white focus:outline-none focus:border-blue-500">
+
+            <select id="country-select" class="w-full bg-white border-2 border-slate-300 hover:border-blue-500 rounded-xl px-3 py-2.5 text-sm font-bold text-slate-900 shadow-sm focus:outline-none focus:border-blue-600 cursor-pointer">
+            </select>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <button type="button" class="quick-country-btn text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-md cursor-pointer" data-country="India">🇮🇳 India</button>
+              <button type="button" class="quick-country-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-country="Paraguay">🇵🇾 Paraguay</button>
+              <button type="button" class="quick-country-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-country="United States">🇺🇸 USA</button>
+              <button type="button" class="quick-country-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-country="United Kingdom">🇬🇧 UK</button>
+              <button type="button" class="quick-country-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-country="United Arab Emirates">🇦🇪 UAE</button>
+              <button type="button" class="quick-country-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-country="Spain">🇪🇸 Spain</button>
+            </div>
+          </div>
+
+          <!-- 2. Major City Selection -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label for="city-select" class="text-sm font-bold text-slate-800 flex items-center">
+                <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mr-2">2</span>
+                Major City
+              </label>
+              <span id="city-count-badge" class="text-xs text-blue-600 font-medium">35 cities</span>
+            </div>
+
+            <input type="text" id="city-filter-input" placeholder="🔍 Type to filter city (e.g. Delhi, Asunción)..."
+              class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus:bg-white focus:outline-none focus:border-blue-500">
+
+            <select id="city-select" class="w-full bg-white border-2 border-slate-300 hover:border-blue-500 rounded-xl px-3 py-2.5 text-sm font-bold text-slate-900 shadow-sm focus:outline-none focus:border-blue-600 cursor-pointer">
+            </select>
+
+            <div id="quick-city-chips-container" class="flex flex-wrap gap-1.5 pt-1"></div>
+          </div>
+
+          <!-- 3. Local Business Category Selection -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label for="category-select" class="text-sm font-bold text-slate-800 flex items-center">
+                <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mr-2">3</span>
+                Business Category
+              </label>
+              <span class="text-xs text-slate-400">40 categories</span>
+            </div>
+
+            <input type="text" id="category-filter-input" placeholder="🔍 Type to filter category (e.g. Gym, Dental, Hospital)..."
+              class="w-full text-xs bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus:bg-white focus:outline-none focus:border-blue-500">
+
+            <select id="category-select" class="w-full bg-white border-2 border-slate-300 hover:border-blue-500 rounded-xl px-3 py-2.5 text-sm font-bold text-slate-900 shadow-sm focus:outline-none focus:border-blue-600 cursor-pointer">
+            </select>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <button type="button" class="quick-category-btn text-[11px] font-bold bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-md cursor-pointer" data-category="gym">🏋️ Gym</button>
+              <button type="button" class="quick-category-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-category="hospital">🏥 Hospital</button>
+              <button type="button" class="quick-category-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-category="salon_spa">💇 Salon</button>
+              <button type="button" class="quick-category-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-category="plumber">🔧 Plumber</button>
+              <button type="button" class="quick-category-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-category="dental">🦷 Dental</button>
+              <button type="button" class="quick-category-btn text-[11px] font-medium bg-slate-100 hover:bg-blue-50 text-slate-700 px-2.5 py-1 rounded-md cursor-pointer" data-category="restaurant">🍽️ Dining</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Optional Custom Override Inputs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+          <div class="space-y-1">
+            <label for="custom-business-input" class="text-xs font-bold text-slate-700">Custom Business Keyword (Optional Override)</label>
+            <input type="text" id="custom-business-input" placeholder="Type custom keyword (e.g. hospital, clinic, zym, crossfit)..."
+              class="w-full bg-slate-50 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-medium text-slate-800">
+          </div>
+          <div class="space-y-1">
+            <label for="custom-city-input" class="text-xs font-bold text-slate-700">Custom City / Locality (Optional Override)</label>
+            <input type="text" id="custom-city-input" placeholder="Type custom locality (e.g. South Delhi, Dehradun, Bandra)..."
+              class="w-full bg-slate-50 focus:bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-medium text-slate-800">
+          </div>
+        </div>
+
+        <!-- Live Local Time & Area Language Card -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-xl p-4 sm:p-5 border border-indigo-900/60 shadow-lg grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-2xl">
+              <span id="time-weather-icon">☀️</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                  Live Local Time
+                </span>
+                <span id="time-business-status" class="text-[10px] font-semibold text-slate-300 bg-white/10 px-2 py-0.5 rounded-full">Open Hours</span>
+              </div>
+              <div class="flex items-baseline space-x-2 mt-1">
+                <span id="live-clock-time" class="text-2xl font-extrabold font-mono text-white">--:--:--</span>
+                <span id="live-clock-tz" class="text-xs font-semibold text-indigo-300 font-mono">IST</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-3.5 border-t lg:border-t-0 lg:border-l lg:border-r border-indigo-800/50 pt-3 lg:pt-0 lg:px-4">
+            <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-xl">🗣️</div>
+            <div class="min-w-0 flex-1">
+              <span class="text-[10px] uppercase font-bold tracking-wider text-amber-300">Local Language of Area</span>
+              <div id="live-area-language" class="text-sm font-bold text-white truncate mt-0.5">Hindi (हिन्दी), English</div>
+              <div class="text-[11px] text-indigo-200 mt-0.5">Greeting: <span id="live-area-greeting" class="font-semibold text-amber-300">Namaste 🙏</span></div>
+            </div>
+          </div>
+
+          <div class="flex flex-col lg:items-end justify-center text-xs text-slate-300 space-y-1 lg:text-right">
+            <div class="font-bold text-white text-sm">📍 <span id="live-location-name">Delhi, India</span></div>
+            <div id="live-clock-date" class="text-slate-300 font-medium">Loading date...</div>
+          </div>
+        </div>
+
+        <!-- Live Search Query Preview -->
+        <div class="bg-gradient-to-r from-slate-50 to-blue-50/50 rounded-xl p-4 border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Live Search Query Preview</span>
+            <div id="preview-text" class="text-lg sm:text-xl font-extrabold text-blue-900 font-mono">zym in delhi in india</div>
+            <p id="preview-url-text" class="text-xs text-blue-600/80 truncate max-w-xl font-mono">https://www.google.com/search?q=zym+in+delhi+in+india</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button type="button" id="copy-query-btn" class="text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 px-3 py-2 rounded-lg cursor-pointer">Copy Query</button>
+            <button type="button" id="copy-url-btn" class="text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 px-3 py-2 rounded-lg cursor-pointer">Copy URL</button>
+          </div>
+        </div>
+
+        <!-- Multilingual Client Outreach Pitch Generator -->
+        <div class="bg-gradient-to-br from-indigo-50/90 via-white to-blue-50/80 rounded-2xl p-5 border-2 border-indigo-200/80 shadow-md space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-indigo-100 pb-3">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-lg">💬</div>
+              <div>
+                <div class="flex items-center space-x-2">
+                  <h3 class="text-sm sm:text-base font-extrabold text-slate-900">Ready-to-Send Client Outreach Pitch</h3>
+                  <span id="outreach-lang-badge" class="bg-indigo-100 text-indigo-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">🇮🇳 Hindi</span>
+                </div>
+                <p class="text-xs text-slate-500">Auto-translated into the selected area's language with a category-matched demo link</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <select id="pitch-lang-override" class="text-xs font-semibold bg-white border border-slate-300 text-slate-700 rounded-lg px-2.5 py-2 cursor-pointer">
+                <option value="auto">🌐 Auto (Match Area Language)</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
+                <option value="es">🇪🇸 Spanish (Español)</option>
+                <option value="fr">🇫🇷 French (Français)</option>
+                <option value="de">🇩🇪 German (Deutsch)</option>
+                <option value="ar">🇸🇦 Arabic (العربية)</option>
+              </select>
+              <button type="button" id="copy-pitch-btn" class="text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg cursor-pointer">Copy Pitch</button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-3 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center space-x-2 flex-1">
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md">🔗 Category Demo URL:</span>
+              <input type="text" id="pitch-demo-url-input" value="https://www.decathlon.com" class="w-full text-xs font-mono text-blue-700 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <button type="button" id="reset-demo-url-btn" class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2.5 py-1.5 rounded-lg cursor-pointer">Auto-Match Link</button>
+              <a id="open-demo-url-link" href="https://www.decathlon.com" target="_blank" class="text-[11px] font-semibold text-blue-600 bg-blue-50 px-2.5 py-1.5 rounded-lg">Test Link ↗</a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-2">
+              <textarea id="outreach-pitch-textarea" rows="5" class="w-full bg-white border border-indigo-200 rounded-xl p-3.5 text-xs sm:text-sm font-medium text-slate-800"></textarea>
+            </div>
+            <div class="bg-slate-100 rounded-xl p-3.5 border border-slate-200 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[11px] font-bold uppercase text-slate-500">🇬🇧 English Meaning</span>
+                  <button type="button" id="copy-english-pitch-btn" class="text-[11px] font-semibold text-blue-600 hover:underline cursor-pointer">Copy English</button>
+                </div>
+                <p id="outreach-english-preview" class="text-xs text-slate-600 whitespace-pre-line"></p>
+              </div>
+              <div class="pt-2 border-t border-slate-200 text-[11px] text-slate-400 flex justify-between">
+                <span>Category: <strong id="pitch-category-label" class="text-slate-600">Gym</strong></span>
+                <span>Ready to Send</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Search Buttons -->
+        <div class="flex flex-col sm:flex-row flex-wrap items-center gap-3 pt-2">
+          <button type="submit" class="w-full sm:flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
+            <span>🔍 Search on Google (New Tab)</span>
+          </button>
+          <button type="button" id="maps-search-btn" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
+            <span>🗺️ Search on Google Maps</span>
+          </button>
+          <button type="button" id="add-top-to-queue-btn" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 px-5 rounded-xl shadow-lg flex items-center justify-center space-x-2 cursor-pointer">
+            <span>➕ Add to Multi-Scraper Queue</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PYTHON WEB AUTOMATION & DUAL REPORT SCRAPER PANEL                     -->
+    <!-- ===================================================================== -->
+    <div id="python-automation-panel" class="bg-white rounded-2xl shadow-xl border-2 border-purple-200 overflow-hidden">
+      <div class="bg-gradient-to-r from-purple-700 via-indigo-700 to-violet-600 px-6 py-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">🤖</div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-lg sm:text-xl font-extrabold tracking-tight">Unlimited Python Google Maps Lead, Website &amp; Business Size Scraper</h3>
+              <span class="bg-amber-400 text-slate-950 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">Size Detector + Multi-Queue</span>
+            </div>
+            <p class="text-purple-100 text-xs sm:text-sm mt-0.5">
+              Auto-detects Large, Medium &amp; Small businesses + Separate reports per queued business &amp; country
+            </p>
+          </div>
+        </div>
+        <button type="button" id="sync-from-top-btn" class="text-xs font-bold bg-white/20 hover:bg-white/30 text-white border border-white/30 px-3 py-2 rounded-xl cursor-pointer">
+          🔄 Sync from Search Filter Above
+        </button>
+      </div>
+
+      <div class="p-6 sm:p-8 space-y-6">
+        <!-- Input Row 1: Target Specifications + Business Size Filter -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="space-y-1">
+            <label for="auto-keyword" class="text-xs font-bold text-slate-700">1. Target Business / Keyword</label>
+            <input type="text" id="auto-keyword" value="zym" placeholder="e.g. hospital, gym, salon" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800">
+          </div>
+
+          <div class="space-y-1">
+            <label for="auto-location" class="text-xs font-bold text-slate-700">2. Target City &amp; Country</label>
+            <input type="text" id="auto-location" value="Delhi, India" placeholder="e.g. Delhi, India" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-phone-prefix" class="text-xs font-bold text-purple-800">3. Phone Prefix</label>
+              <span class="text-[10px] font-semibold bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded">Blank = All</span>
+            </div>
+            <input type="text" id="auto-phone-prefix" placeholder="e.g. +91 or +595" class="w-full bg-purple-50/60 focus:bg-white border-2 border-purple-300 focus:border-purple-600 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-900 focus:outline-none">
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-size-filter" class="text-xs font-extrabold text-blue-900">4. Business Size Filter</label>
+              <span class="text-[10px] font-bold bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">Smart Scale</span>
+            </div>
+            <select id="auto-size-filter" class="w-full bg-blue-50/70 border-2 border-blue-300 rounded-xl px-3 py-2 text-xs font-extrabold text-slate-900 cursor-pointer focus:outline-none focus:border-blue-600">
+              <option value="all" selected>🌐 All Sizes (Small, Medium &amp; Large)</option>
+              <option value="small">🏪 Small Only (Clinics, Local Shops)</option>
+              <option value="medium">🏬 Medium Only (Established Stores)</option>
+              <option value="large">🏢 Large Only (Big Hospitals, Chains)</option>
+              <option value="small_medium">🏪+🏬 Small &amp; Medium Only</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-max-leads" class="text-xs font-bold text-slate-700">5. Max Leads / Target</label>
+              <span class="text-[10px] font-semibold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded">0 = Unlimited</span>
+            </div>
+            <input type="number" id="auto-max-leads" min="0" value="0" placeholder="0 = Unlimited" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-slate-800">
+          </div>
+        </div>
+
+        <!-- Input Row 2: Website Visit Toggle, Browser Mode, Parallel vs Sequential & Concurrency Controls -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-visit-web" class="text-xs font-bold text-emerald-800">6. Visit Website</label>
+              <span class="text-[10px] font-semibold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded">ON / OFF</span>
+            </div>
+            <select id="auto-visit-web" class="w-full bg-emerald-50/70 border-2 border-emerald-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 cursor-pointer focus:outline-none focus:border-emerald-600">
+              <option value="true">✅ ON (Visit &amp; Extract Contacts)</option>
+              <option value="false">❌ OFF (Fast Search Only)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <label for="auto-headless" class="text-xs font-bold text-slate-700">7. Browser Display Mode</label>
+            <select id="auto-headless" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800 cursor-pointer">
+              <option value="false">🖥️ Visible Browser Window</option>
+              <option value="true">👻 Headless Mode (Fast Background)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-exec-mode" class="text-xs font-extrabold text-indigo-900">8. Queue Execution Mode</label>
+              <span class="text-[10px] font-extrabold bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full">⚡ Ek Sath / 1-by-1</span>
+            </div>
+            <select id="auto-exec-mode" class="w-full bg-indigo-50/70 border-2 border-indigo-300 focus:border-indigo-600 rounded-xl px-3.5 py-2.5 text-xs font-extrabold text-indigo-950 cursor-pointer">
+              <option value="parallel" selected>⚡ Run All Targets at Once (Parallel / Ek Sath)</option>
+              <option value="sequential">🔄 Run One by One (Sequential)</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <label for="auto-concurrency" class="text-xs font-bold text-slate-700">9. Simultaneous Browsers Limit</label>
+              <span class="text-[10px] text-slate-500 font-semibold">Workers</span>
+            </div>
+            <select id="auto-concurrency" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold text-slate-800 cursor-pointer">
+              <option value="2">2 Targets at Once</option>
+              <option value="3" selected>3 Targets at Once</option>
+              <option value="4">4 Targets at Once</option>
+              <option value="5">5 Targets at Once</option>
+              <option value="10">All Targets at Once (Max 10)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- UNLIMITED MULTI-BUSINESS & MULTI-CITY BATCH QUEUE MANAGER -->
+        <div class="bg-gradient-to-br from-purple-50/90 via-indigo-50/50 to-white rounded-2xl p-4 sm:p-5 border-2 border-purple-200/80 space-y-4">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-purple-800 bg-purple-100 border border-purple-300 px-2.5 py-0.5 rounded-full">
+                  🚀 Unlimited Multi-Business &amp; Multi-City Batch Queue
+                </span>
+                <span id="queue-count-badge" class="text-xs font-extrabold bg-indigo-600 text-white px-2.5 py-0.5 rounded-full">0 Queued</span>
+              </div>
+              <p class="text-xs text-slate-600 mt-1">
+                Add as many businesses &amp; countries as you want. Every queued target gets its own separate PDF &amp; Excel extraction!
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="add-to-queue-btn" class="text-xs font-extrabold bg-purple-600 hover:bg-purple-700 text-white px-3.5 py-2 rounded-xl shadow-sm cursor-pointer">
+                ➕ Add Above Input to Queue
+              </button>
+              <button type="button" id="load-example-queue-btn" class="text-xs font-bold bg-indigo-100 hover:bg-indigo-200 text-indigo-800 border border-indigo-300 px-3 py-2 rounded-xl cursor-pointer">
+                ⚡ Load Example Queue
+              </button>
+              <button type="button" id="toggle-bulk-box-btn" class="text-xs font-bold bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-3 py-2 rounded-xl cursor-pointer">
+                📋 Bulk Paste Unlimited Lines
+              </button>
+              <button type="button" id="clear-queue-btn" class="text-xs font-bold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-3 py-2 rounded-xl cursor-pointer">
+                🗑️ Clear Queue
+              </button>
+            </div>
+          </div>
+
+          <!-- Collapsible Bulk Paste Box -->
+          <div id="bulk-paste-box" class="hidden bg-white rounded-xl p-3.5 border border-purple-200 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label for="bulk-targets-input" class="text-xs font-bold text-slate-800">
+                Paste Unlimited Targets (One per line — Format: <code class="text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">Business | City, Country | OptionalPhonePrefix</code> OR <code class="text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">Business in City, Country</code>)
+              </label>
+            </div>
+            <textarea id="bulk-targets-input" rows="4" placeholder="hospital | Delhi, India&#10;gym | Asunción, Paraguay&#10;Dental Supply Store | London, United Kingdom | +44" class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-xl p-3 focus:bg-white focus:outline-none focus:border-purple-500"></textarea>
+            <div class="flex justify-end gap-2">
+              <button type="button" id="add-bulk-targets-btn" class="text-xs font-extrabold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl cursor-pointer">
+                ➕ Add All Pasted Lines to Queue
+              </button>
+            </div>
+          </div>
+
+          <!-- Queued Items Container -->
+          <div id="batch-queue-list" class="space-y-2 max-h-60 overflow-y-auto custom-scrollbar"></div>
+        </div>
+
+        <!-- START, SKIP NEXT & STOP BUTTONS -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-100">
+          <div class="flex flex-wrap items-center gap-3">
+            <button type="button" id="start-scraper-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm py-3.5 px-6 rounded-xl shadow-lg flex items-center space-x-2 cursor-pointer">
+              <span id="start-scraper-btn-label">⚡ Start Unlimited Python Scraper</span>
+            </button>
+
+            <button type="button" id="skip-task-btn" disabled class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs sm:text-sm py-3.5 px-5 rounded-xl shadow-lg flex items-center space-x-2 opacity-50 cursor-not-allowed transition-all">
+              <span>⏭️ Finish Current &amp; Next Business</span>
+            </button>
+
+            <button type="button" id="stop-scraper-btn" disabled class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm py-3.5 px-6 rounded-xl shadow-lg flex items-center space-x-2 opacity-50 cursor-not-allowed transition-all">
+              <span>🛑 Stop &amp; Download Both PDFs Now</span>
+            </button>
+          </div>
+
+          <span id="live-filename-preview" class="text-[11px] text-purple-700 bg-purple-50 border border-purple-200 px-3 py-1 rounded-lg font-mono font-semibold">
+            File Format: zym_India_With/Without_Website.pdf
+          </span>
+        </div>
+
+        <!-- Live Status Box -->
+        <div id="scraper-status" class="text-xs font-mono text-slate-700 bg-slate-100 p-3.5 rounded-xl border border-slate-200 hidden">
+          Status: Idle
+        </div>
+
+        <!-- DUAL PDF & EXCEL DOWNLOAD CARDS -->
+        <div id="dual-reports-download-section" class="space-y-4 hidden">
+          <!-- ZIP Bundle Banner for Multi-Business Runs -->
+          <div id="batch-zip-banner" class="bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 text-white rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+            <div>
+              <span class="inline-block bg-amber-400 text-slate-950 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full mb-1">
+                📦 Complete Multi-Business Bundle
+              </span>
+              <h4 class="text-sm font-extrabold">Download All Targets Individual &amp; Combined Reports (.ZIP)</h4>
+              <p class="text-xs text-purple-200">Includes separate With_Website &amp; Without_Website PDF + Excel files for every single business &amp; country in your queue.</p>
+            </div>
+            <a id="dl-batch-zip" href="http://127.0.0.1:5000/download-batch-zip" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs py-3 px-5 rounded-xl text-center shadow-md whitespace-nowrap">
+              📦 Download All Reports (.ZIP)
+            </a>
+          </div>
+
+          <!-- Per-Target Individual Download Cards -->
+          <div id="per-task-downloads-wrapper" class="bg-indigo-50/70 border-2 border-indigo-200 rounded-2xl p-4 space-y-3 hidden">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-extrabold uppercase tracking-wider text-indigo-950">📂 Individual Reports Per Queued Business &amp; Country</h4>
+              <span class="text-[11px] font-semibold text-indigo-700">Separate PDF &amp; Excel for each queue item</span>
+            </div>
+            <div id="per-task-downloads-list" class="space-y-2.5 max-h-72 overflow-y-auto custom-scrollbar"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Card 1: Businesses WITH Website -->
+            <div class="bg-emerald-50/80 border-2 border-emerald-200 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full mb-1">
+                    🌐 Website Already Added
+                  </span>
+                  <h4 class="text-sm font-extrabold text-slate-900">Combined Report: Businesses WITH Website</h4>
+                  <p id="with-web-filename-label" class="text-[11px] font-mono text-emerald-700 font-semibold mt-0.5">zym_India_With_Website.pdf</p>
+                </div>
+                <span id="with-web-count-badge" class="bg-emerald-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">0</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-emerald-200/60">
+                <a id="dl-with-pdf" href="http://127.0.0.1:5000/download/with_website/pdf" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl text-center shadow-sm">
+                  📄 Download PDF (With Website)
+                </a>
+                <a id="dl-with-excel" href="http://127.0.0.1:5000/download/with_website/excel" class="flex-1 bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-xs py-2.5 px-3 rounded-xl text-center">
+                  📥 Download Excel (.xlsx)
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2: Businesses WITHOUT Website -->
+            <div class="bg-rose-50/80 border-2 border-rose-200 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span class="inline-block bg-rose-100 text-rose-800 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full mb-1">
+                    🔥 Hot Web-Dev Prospects
+                  </span>
+                  <h4 class="text-sm font-extrabold text-slate-900">Combined Report: Businesses WITHOUT Website</h4>
+                  <p id="without-web-filename-label" class="text-[11px] font-mono text-rose-700 font-semibold mt-0.5">zym_India_Without_Website.pdf</p>
+                </div>
+                <span id="without-web-count-badge" class="bg-rose-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">0</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-rose-200/60">
+                <a id="dl-without-pdf" href="http://127.0.0.1:5000/download/without_website/pdf" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-2.5 px-3 rounded-xl text-center shadow-sm">
+                  📄 Download PDF (Without Website)
+                </a>
+                <a id="dl-without-excel" href="http://127.0.0.1:5000/download/without_website/excel" class="flex-1 bg-white hover:bg-rose-100 text-rose-800 border border-rose-300 font-bold text-xs py-2.5 px-3 rounded-xl text-center">
+                  📥 Download Excel (.xlsx)
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Extracted Leads Table -->
+        <div id="scraped-results-container" class="space-y-3 hidden">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="text-sm font-bold text-slate-900">📋 Extracted Business Leads Preview</h4>
+              <select id="task-filter-select" class="text-xs font-semibold bg-white border border-slate-300 text-slate-800 rounded-lg px-2.5 py-1.5 cursor-pointer">
+                <option value="all_tasks">🌍 All Targets Combined</option>
+              </select>
+              <select id="table-size-filter-select" class="text-xs font-bold bg-blue-50 border border-blue-300 text-blue-900 rounded-lg px-2.5 py-1.5 cursor-pointer">
+                <option value="all_sizes">📊 All Sizes (Large / Medium / Small)</option>
+                <option value="Large">🏢 Large Businesses Only</option>
+                <option value="Medium">🏬 Medium Businesses Only</option>
+                <option value="Small">🏪 Small Businesses Only</option>
+              </select>
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <button type="button" data-filter="all" class="lead-tab-btn text-xs font-bold bg-purple-600 text-white px-3 py-1.5 rounded-lg cursor-pointer">
+                All Leads (<span id="tab-count-all">0</span>)
+              </button>
+              <button type="button" data-filter="with_website" class="lead-tab-btn text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-emerald-50 px-3 py-1.5 rounded-lg cursor-pointer">
+                🌐 With Website (<span id="tab-count-with">0</span>)
+              </button>
+              <button type="button" data-filter="without_website" class="lead-tab-btn text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-rose-50 px-3 py-1.5 rounded-lg cursor-pointer">
+                ❌ Without Website (<span id="tab-count-without">0</span>)
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 rounded-xl custom-scrollbar max-h-96">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="sticky top-0 bg-slate-100 text-slate-700 border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3 font-bold">#</th>
+                  <th class="py-2.5 px-3 font-bold">Target (Business &amp; City)</th>
+                  <th class="py-2.5 px-3 font-bold">Business Name</th>
+                  <th class="py-2.5 px-3 font-bold">📊 Business Size &amp; Reviews</th>
+                  <th class="py-2.5 px-3 font-bold">🗺️ Google Maps Phone</th>
+                  <th class="py-2.5 px-3 font-bold">🌐 Website Extracted Phone</th>
+                  <th class="py-2.5 px-3 font-bold">Website Status</th>
+                  <th class="py-2.5 px-3 font-bold">Website Link</th>
+                  <th class="py-2.5 px-3 font-bold">✉️ Extracted Email</th>
+                  <th class="py-2.5 px-3 font-bold">Address</th>
+                </tr>
+              </thead>
+              <tbody id="scraped-results-tbody" class="divide-y divide-slate-100"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Browse All 40 Categories Grid -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold text-slate-900">Browse All 40 Local Business Categories</h3>
+        <span class="text-xs text-slate-400">Click any card to select</span>
+      </div>
+      <div id="category-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"></div>
+    </div>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-slate-900 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2">
+      <span id="toast-icon" class="text-emerald-400">✓</span>
+      <span id="toast-message">Action completed</span>
+    </div>
+  </div>
+
+  <script>
+    const BACKEND_URL = (window.location.protocol === "file:" || !window.location.hostname || window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost")
+      ? "http://127.0.0.1:5000" 
+      : window.location.origin;
+
+    const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (DRC)", "Congo (Republic)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
+
+    const categories = [
+      {"id": "gym", "name": "Gym & Fitness Store (Zym)", "icon": "🏋️", "queryName": "zym", "url": "https://www.decathlon.com"},
+      {"id": "restaurant", "name": "Restaurant & Kitchen Supply Store", "icon": "🍽️", "queryName": "Restaurant Supply Store", "url": "https://www.webstaurantstore.com"},
+      {"id": "cafe", "name": "Cafe & Coffee Equipment Store", "icon": "☕", "queryName": "Coffee Store", "url": "https://www.nespresso.com"},
+      {"id": "dental", "name": "Dental Care & Supply Store", "icon": "🦷", "queryName": "Dental Supply Store", "url": "https://www.oralb.com"},
+      {"id": "hospital", "name": "Hospital & Medical Center", "icon": "🏥", "queryName": "Hospital", "url": "https://www.medline.com"},
+      {"id": "salon_spa", "name": "Salon & Beauty Supply Store", "icon": "💇", "queryName": "Beauty Supply Store", "url": "https://www.sallybeauty.com"},
+      {"id": "plumber", "name": "Plumbing & Sanitary Repair Store", "icon": "🔧", "queryName": "Plumbing and Sanitary Store", "url": "https://www.ferguson.com"},
+      {"id": "electrician", "name": "Electrical & Wiring Repair Store", "icon": "⚡", "queryName": "Electrical Repair Store", "url": "https://www.lowes.com"},
+      {"id": "auto_repair", "name": "Auto Repair & Car Parts Store", "icon": "🚗", "queryName": "Auto Repair Store", "url": "https://www.bauhaus.es"},
+      {"id": "pharmacy", "name": "Pharmacy & Medical Store", "icon": "💊", "queryName": "Pharmacy Store", "url": "https://www.walgreens.com"},
+      {"id": "bakery", "name": "Bakery & Cake Shop Store", "icon": "🎂", "queryName": "Bakery Store", "url": "https://www.magnoliabakery.com"},
+      {"id": "real_estate", "name": "Home Improvement & Building Store", "icon": "🏢", "queryName": "Home Improvement Store", "url": "https://www.homedepot.com"},
+      {"id": "hotel", "name": "Mattress, Bedding & Home Store", "icon": "🏨", "queryName": "Bedding and Mattress Store", "url": "https://www.casper.com"},
+      {"id": "grocery", "name": "Grocery Store & Supermarket", "icon": "🛒", "queryName": "Grocery Store", "url": "https://www.wholefoodsmarket.com"},
+      {"id": "hardware", "name": "Hardware & Tools Repair Store", "icon": "🔨", "queryName": "Hardware Store", "url": "https://www.acehardware.com"},
+      {"id": "law_firm", "name": "Office Supplies & Printing Store", "icon": "⚖️", "queryName": "Office Supply Store", "url": "https://www.staples.com"},
+      {"id": "accounting", "name": "Electronics & Appliance Repair Store", "icon": "📊", "queryName": "Appliance Repair Store", "url": "https://www.bestbuy.com"},
+      {"id": "vet_pet", "name": "Pet Care & Pet Supply Store", "icon": "🐾", "queryName": "Pet Supply Store", "url": "https://www.petco.com"},
+      {"id": "photography", "name": "Camera & Photo Equipment Store", "icon": "📸", "queryName": "Camera Store", "url": "https://www.bhphotovideo.com"},
+      {"id": "laundry", "name": "Dry Cleaning & Garment Care Store", "icon": "👔", "queryName": "Dry Cleaning Store", "url": "https://www.tidecleaners.com"},
+      {"id": "boutique", "name": "Clothing Boutique & Tailor Store", "icon": "👗", "queryName": "Clothing Store", "url": "https://www.zara.com"},
+      {"id": "bookstore", "name": "Bookstore & Stationery Store", "icon": "📚", "queryName": "Bookstore", "url": "https://www.barnesandnoble.com"},
+      {"id": "yoga", "name": "Yoga & Sportswear Store", "icon": "🧘", "queryName": "Sportswear Store", "url": "https://www.lululemon.com"},
+      {"id": "daycare", "name": "Kids, Toys & Baby Store", "icon": "👶", "queryName": "Toy and Baby Store", "url": "https://www.carters.com"},
+      {"id": "florist", "name": "Florist & Flower Shop Store", "icon": "💐", "queryName": "Flower Store", "url": "https://www.1800flowers.com"},
+      {"id": "car_wash", "name": "Car Care & Auto Detailing Store", "icon": "🧼", "queryName": "Auto Detailing Store", "url": "https://www.autozone.com"},
+      {"id": "computer_repair", "name": "Computer & Mobile Repair Store", "icon": "💻", "queryName": "Computer and Mobile Repair Store", "url": "https://www.ubreakifix.com"},
+      {"id": "cleaning", "name": "Cleaning Equipment & Repair Store", "icon": "🧹", "queryName": "Cleaning Equipment Store", "url": "https://www.kaercher.com"},
+      {"id": "event_planner", "name": "Party Supplies & Event Decor Store", "icon": "🎉", "queryName": "Party Supply Store", "url": "https://www.partycity.com"},
+      {"id": "jewelry", "name": "Jewelry & Watch Repair Store", "icon": "💍", "queryName": "Jewelry and Watch Store", "url": "https://www.tiffany.com"},
+      {"id": "optician", "name": "Optical & Eyewear Repair Store", "icon": "👓", "queryName": "Optical Store", "url": "https://www.lenskart.com"},
+      {"id": "furniture", "name": "Furniture & Woodwork Repair Store", "icon": "🛋️", "queryName": "Furniture Store", "url": "https://www.ikea.com"},
+      {"id": "barbershop", "name": "Barbershop & Grooming Supply Store", "icon": "💈", "queryName": "Grooming Store", "url": "https://www.theartofshaving.com"},
+      {"id": "pest_control", "name": "Garden, Lawn & Pest Supply Store", "icon": "🐜", "queryName": "Garden Supply Store", "url": "https://www.tractorsupply.com"},
+      {"id": "security_cctv", "name": "CCTV & Security Systems Store", "icon": "📹", "queryName": "CCTV Security Store", "url": "https://www.lorex.com"},
+      {"id": "music_dance", "name": "Musical Instruments & Repair Store", "icon": "🎵", "queryName": "Musical Instrument Store", "url": "https://www.guitarcenter.com"},
+      {"id": "packers_movers", "name": "Moving Boxes & Packing Supply Store", "icon": "📦", "queryName": "Packing Supply Store", "url": "https://www.uhaul.com"},
+      {"id": "painting", "name": "Paint, Coatings & Hardware Store", "icon": "🎨", "queryName": "Paint Store", "url": "https://www.sherwin-williams.com"},
+      {"id": "hvac_ac", "name": "AC, Heating & Cooling Repair Store", "icon": "❄️", "queryName": "AC Repair Store", "url": "https://www.grainger.com"},
+      {"id": "locksmith", "name": "Locksmith, Keys & Safe Repair Store", "icon": "🔑", "queryName": "Locksmith Store", "url": "https://www.masterlock.com"}
+    ];
+
+    const citiesByCountry = {
+      "India": ["Delhi", "Mumbai", "Bengaluru", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Chandigarh", "Noida", "Gurugram", "Indore", "Bhopal", "Patna", "Vadodara", "Kochi", "Dehradun", "Agra", "Varanasi", "Amritsar", "Nagpur", "Coimbatore", "Visakhapatnam", "Ludhiana", "Nashik", "Rajkot", "Meerut", "Guwahati", "Bhubaneswar", "Kanpur", "Prayagraj", "Mysuru"],
+      "United States": ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "Austin", "San Jose", "San Francisco", "Seattle", "Denver", "Boston", "Washington D.C.", "Miami", "Atlanta", "Las Vegas", "Orlando"],
+      "United Kingdom": ["London", "Westminster, London", "Camden, London", "City of London", "Croydon, London", "Greenwich, London", "Southall, London", "Wembley, London", "Canary Wharf, London", "Kensington, London", "Soho, London", "Harrow, London", "Ilford, London", "Manchester", "Birmingham", "Leeds", "Glasgow", "Liverpool", "Newcastle", "Sheffield", "Bristol", "Edinburgh", "Belfast", "Cardiff"],
+      "Canada": ["Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa", "Winnipeg", "Quebec City", "Hamilton", "Victoria"],
+      "Australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Canberra", "Newcastle", "Hobart", "Darwin"],
+      "United Arab Emirates": ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Ras Al Khaimah", "Al Ain", "Fujairah"],
+      "Germany": ["Berlin", "Munich", "Frankfurt", "Hamburg", "Cologne", "Stuttgart", "Düsseldorf", "Leipzig"],
+      "France": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg", "Bordeaux"],
+      "Spain": ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Malaga", "Bilbao", "Alicante"],
+      "Italy": ["Rome", "Milan", "Naples", "Turin", "Florence", "Venice", "Bologna"],
+      "Saudi Arabia": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
+      "Singapore": ["Central Singapore", "Jurong", "Woodlands", "Tampines", "Bedok"],
+      "Paraguay": ["Asunción", "Ciudad del Este", "San Lorenzo", "Luque", "Capiatá", "Lambaré", "Fernando de la Mora"]
+    };
+
+    const pitchTemplates = {
+      "hi": {"name": "Hindi (हिन्दी)", "flag": "🇮🇳", "template": "नमस्ते! मैं एक वेब डेवलपर हूँ। मैंने विशेष रूप से आपके जैसे {category} के लिए यह वेबसाइट बनाई है, ताकि रोज़मर्रा के प्रबंधन को आसान बनाया जा सके और अधिक स्थानीय ग्राहकों को आकर्षित किया जा सके:\nलिंक: {url}\nयदि आप अपने व्यवसाय के लिए इस तरह का समाधान उपयोग करना चाहते हैं, तो मुझे बताएं और हम बिना किसी बाध्यता के इस पर चर्चा कर सकते हैं।\nआपका दिन शुभ हो!"},
+      "en": {"name": "English", "flag": "🇬🇧", "template": "Hello! I am a web developer. I have created this website specifically for {category} like yours, to simplify daily management and attract many more local clients:\nLink: {url}\nIf you would like to use a solution like this for your business, please let me know and we can discuss it with no obligation.\nHave a great day!"},
+      "es": {"name": "Spanish (Español)", "flag": "🇪🇸", "template": "¡Hola! Soy desarrollador web. He creado este sitio web específicamente para {category} como el suyo, para simplificar la gestión diaria y atraer a muchos más clientes locales:\nEnlace: {url}\nSi desea utilizar una solución así para su negocio, hágamelo saber y lo discutiremos sin ningún compromiso.\n¡Que tenga un buen día!"},
+      "fr": {"name": "French (Français)", "flag": "🇫🇷", "template": "Bonjour ! Je suis développeur web. J'ai créé ce site web spécifiquement pour les {category} comme le vôtre :\nLien : {url}\nSi vous souhaitez utiliser une telle solution, faites-le-moi savoir.\nBonne journée !"},
+      "de": {"name": "German (Deutsch)", "flag": "🇩🇪", "template": "Hallo! Ich bin Webentwickler. Ich habe diese Website speziell für {category} wie Ihres erstellt:\nLink: {url}\nWenn Sie eine solche Lösung nutzen möchten, lassen Sie es mich wissen."},
+      "ar": {"name": "Arabic (العربية)", "flag": "🇸🇦", "template": "مرحباً! أنا مطور مواقع ويب. لقد قمت بتصميم هذا الموقع خصيصاً لـ {category} مثل مشروعكم:\nالرابط: {url}\nإذا كنتم ترغبون في استخدام حل مماثل لعملكم، يرجى إعلامي."}
+    };
+
+    let selectedCountry = "India";
+    let selectedCity = "Delhi";
+    let selectedCategory = categories[0];
+    let customBusiness = "";
+    let customCity = "";
+    let currentTabFilter = "all";
+    let currentTaskFilter = "all_tasks";
+    let currentSizeFilter = "all_sizes";
+    let progressTimer = null;
+
+    let batchQueue = [];
+    let scrapedDataStore = { all: [], with_website: [], without_website: [], tasks: [] };
+
+    const countrySelect = document.getElementById('country-select');
+    const citySelect = document.getElementById('city-select');
+    const categorySelect = document.getElementById('category-select');
+    const countryFilterInput = document.getElementById('country-filter-input');
+    const cityFilterInput = document.getElementById('city-filter-input');
+    const categoryFilterInput = document.getElementById('category-filter-input');
+    const quickCityChipsContainer = document.getElementById('quick-city-chips-container');
+    const categoryGrid = document.getElementById('category-grid');
+
+    function cleanPart(str) {
+      return (str || "Unknown").replace(/[^\w\s-]/g, '').trim().replace(/[\s-]+/g, '_') || "Unknown";
+    }
+
+    function getActiveBizAndCountry() {
+      const bizRaw = document.getElementById('auto-keyword').value.trim() || (customBusiness.trim() || (selectedCategory ? selectedCategory.queryName : "zym"));
+      const locRaw = document.getElementById('auto-location').value.trim() || selectedCountry;
+      const locParts = locRaw.split(',').map(s => s.trim()).filter(Boolean);
+      const countryRaw = locParts.length > 0 ? locParts[locParts.length - 1] : selectedCountry;
+      return {
+        biz: cleanPart(bizRaw),
+        country: cleanPart(countryRaw)
+      };
+    }
+
+    function updateDownloadLinksAndFilenameLabels() {
+      const { biz, country } = getActiveBizAndCountry();
+      const queryParams = `?biz=${encodeURIComponent(biz)}&country=${encodeURIComponent(country)}`;
+
+      document.getElementById('live-filename-preview').textContent = `File Format: ${biz}_${country}_With/Without_Website.pdf`;
+      document.getElementById('with-web-filename-label').textContent = `${biz}_${country}_With_Website.pdf`;
+      document.getElementById('without-web-filename-label').textContent = `${biz}_${country}_Without_Website.pdf`;
+
+      document.getElementById('dl-with-pdf').href = `${BACKEND_URL}/download/with_website/pdf${queryParams}`;
+      document.getElementById('dl-with-excel').href = `${BACKEND_URL}/download/with_website/excel${queryParams}`;
+      document.getElementById('dl-without-pdf').href = `${BACKEND_URL}/download/without_website/pdf${queryParams}`;
+      document.getElementById('dl-without-excel').href = `${BACKEND_URL}/download/without_website/excel${queryParams}`;
+    }
+
+    function showToast(msg, icon = "✓") {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2400);
+    }
+
+    function populateCountrySelect(filterText = "") {
+      const lower = filterText.toLowerCase().trim();
+      countrySelect.innerHTML = "";
+      const filtered = countries.filter(c => !lower || c.toLowerCase().includes(lower));
+      filtered.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        if (c === selectedCountry) opt.selected = true;
+        countrySelect.appendChild(opt);
+      });
+      if (filtered.length > 0 && !filtered.includes(selectedCountry)) {
+        selectedCountry = filtered[0];
+        countrySelect.value = selectedCountry;
+        populateCitySelect();
+      }
+    }
+
+    function populateCitySelect(filterText = "") {
+      const lower = filterText.toLowerCase().trim();
+      const rawCities = citiesByCountry[selectedCountry] || [`Capital of ${selectedCountry}`, `Central ${selectedCountry}`];
+      document.getElementById('city-count-badge').textContent = `${rawCities.length} cities in ${selectedCountry}`;
+
+      citySelect.innerHTML = "";
+      const filtered = rawCities.filter(c => !lower || c.toLowerCase().includes(lower));
+
+      const allOpt = document.createElement('option');
+      allOpt.value = "All Cities";
+      allOpt.textContent = `🌐 All Cities (${selectedCountry})`;
+      citySelect.appendChild(allOpt);
+
+      filtered.forEach(city => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = `📍 ${city}`;
+        if (city === selectedCity) opt.selected = true;
+        citySelect.appendChild(opt);
+      });
+
+      if (filtered.length > 0 && !filtered.includes(selectedCity) && selectedCity !== "All Cities") {
+        selectedCity = filtered[0];
+        citySelect.value = selectedCity;
+      }
+
+      renderQuickCityChips(rawCities);
+    }
+
+    function renderQuickCityChips(cities) {
+      quickCityChipsContainer.innerHTML = "";
+      cities.slice(0, 6).forEach(city => {
+        const btn = document.createElement('button');
+        btn.type = "button";
+        btn.className = `text-[11px] px-2.5 py-1 rounded-md cursor-pointer ${
+          city === selectedCity ? 'font-bold bg-blue-50 text-blue-700 border border-blue-200' : 'font-medium bg-slate-100 hover:bg-blue-50 text-slate-600'
+        }`;
+        btn.textContent = city;
+        btn.onclick = () => {
+          selectedCity = city;
+          citySelect.value = city;
+          document.getElementById('custom-city-input').value = "";
+          customCity = "";
+          renderQuickCityChips(cities);
+          updateAllPreviews();
+          showToast(`City selected: ${city}`, "📍");
+        };
+        quickCityChipsContainer.appendChild(btn);
+      });
+    }
+
+    function populateCategorySelect(filterText = "") {
+      const lower = filterText.toLowerCase().trim();
+      categorySelect.innerHTML = "";
+      const filtered = categories.filter(cat => !lower || cat.name.toLowerCase().includes(lower) || cat.queryName.toLowerCase().includes(lower));
+
+      filtered.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = `${cat.icon} ${cat.name}`;
+        if (selectedCategory && cat.id === selectedCategory.id) opt.selected = true;
+        categorySelect.appendChild(opt);
+      });
+
+      if (filtered.length > 0 && (!selectedCategory || !filtered.some(c => c.id === selectedCategory.id))) {
+        selectedCategory = filtered[0];
+        categorySelect.value = selectedCategory.id;
+      }
+    }
+
+    function renderCategoryGrid() {
+      categoryGrid.innerHTML = "";
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.type = "button";
+        const isSelected = selectedCategory && selectedCategory.id === cat.id;
+        btn.className = `p-3 rounded-xl border text-left cursor-pointer transition-all ${
+          isSelected ? 'bg-blue-50 border-blue-500 ring-1 ring-blue-500/30 font-bold' : 'bg-white border-slate-200 hover:border-blue-300'
+        }`;
+        btn.innerHTML = `
+          <div class="text-2xl mb-1">${cat.icon}</div>
+          <div class="text-xs font-bold text-slate-800 line-clamp-2">${cat.name}</div>
+        `;
+        btn.onclick = () => {
+          selectedCategory = cat;
+          categorySelect.value = cat.id;
+          document.getElementById('custom-business-input').value = "";
+          customBusiness = "";
+          document.getElementById('pitch-demo-url-input').value = cat.url;
+          document.getElementById('open-demo-url-link').href = cat.url;
+          renderCategoryGrid();
+          updateAllPreviews();
+          showToast(`Selected: ${cat.name}`, "🎯");
+        };
+        categoryGrid.appendChild(btn);
+      });
+    }
+
+    function getSearchQuery() {
+      const biz = customBusiness.trim() || (selectedCategory ? selectedCategory.queryName : "zym");
+      const city = customCity.trim() || (selectedCity && selectedCity !== "All Cities" ? selectedCity : "");
+      return city ? `${biz} in ${city} in ${selectedCountry}`.toLowerCase() : `${biz} in ${selectedCountry}`.toLowerCase();
+    }
+
+    function syncAutomationInputs() {
+      const biz = customBusiness.trim() || (selectedCategory ? selectedCategory.queryName : "zym");
+      const city = customCity.trim() || (selectedCity && selectedCity !== "All Cities" ? selectedCity : "");
+      document.getElementById('auto-keyword').value = biz;
+      document.getElementById('auto-location').value = city ? `${city}, ${selectedCountry}` : selectedCountry;
+      updateDownloadLinksAndFilenameLabels();
+    }
+
+    function updateAllPreviews() {
+      const q = getSearchQuery();
+      document.getElementById('preview-text').textContent = q;
+      document.getElementById('preview-url-text').textContent = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+      document.getElementById('google-search-param').value = q;
+
+      const locLabel = (customCity.trim() || selectedCity) + ", " + selectedCountry;
+      document.getElementById('live-location-name').textContent = locLabel;
+
+      const overrideLang = document.getElementById('pitch-lang-override').value;
+      let langCode = overrideLang;
+      if (overrideLang === "auto") {
+        if (selectedCountry === "India") {
+          langCode = "hi";
+          document.getElementById('live-area-language').textContent = "Hindi (हिन्दी), English";
+          document.getElementById('live-area-greeting').textContent = "Namaste 🙏";
+        } else if (["Spain", "Mexico", "Argentina", "Colombia", "Chile", "Paraguay", "Peru", "Bolivia"].includes(selectedCountry)) {
+          langCode = "es";
+          document.getElementById('live-area-language').textContent = "Spanish (Español)";
+          document.getElementById('live-area-greeting').textContent = "¡Hola! 👋";
+        } else if (["France", "Belgium"].includes(selectedCountry)) {
+          langCode = "fr";
+          document.getElementById('live-area-language').textContent = "French (Français)";
+          document.getElementById('live-area-greeting').textContent = "Bonjour 👋";
+        } else if (["Germany", "Austria"].includes(selectedCountry)) {
+          langCode = "de";
+          document.getElementById('live-area-language').textContent = "German (Deutsch)";
+          document.getElementById('live-area-greeting').textContent = "Hallo 👋";
+        } else if (["United Arab Emirates", "Saudi Arabia", "Qatar", "Egypt"].includes(selectedCountry)) {
+          langCode = "ar";
+          document.getElementById('live-area-language').textContent = "Arabic (العربية), English";
+          document.getElementById('live-area-greeting').textContent = "Marhaban 🤝";
+        } else {
+          langCode = "en";
+          document.getElementById('live-area-language').textContent = "English";
+          document.getElementById('live-area-greeting').textContent = "Hello 👋";
+        }
+      }
+
+      const tpl = pitchTemplates[langCode] || pitchTemplates["en"];
+      const demoUrl = document.getElementById('pitch-demo-url-input').value.trim() || selectedCategory.url;
+      const catLabel = customBusiness.trim() || selectedCategory.name;
+
+      document.getElementById('outreach-pitch-textarea').value = tpl.template.replace("{category}", catLabel).replace("{url}", demoUrl);
+      document.getElementById('outreach-english-preview').textContent = pitchTemplates["en"].template.replace("{category}", catLabel).replace("{url}", demoUrl);
+      document.getElementById('outreach-lang-badge').textContent = `${tpl.flag} ${tpl.name}`;
+      document.getElementById('pitch-category-label').textContent = catLabel;
+
+      syncAutomationInputs();
+    }
+
+    countrySelect.addEventListener('change', (e) => {
+      selectedCountry = e.target.value;
+      const cities = citiesByCountry[selectedCountry] || [`Capital of ${selectedCountry}`];
+      selectedCity = cities[0];
+      populateCitySelect();
+      updateAllPreviews();
+      showToast(`Country: ${selectedCountry}`, "🌍");
+    });
+
+    citySelect.addEventListener('change', (e) => {
+      selectedCity = e.target.value;
+      document.getElementById('custom-city-input').value = "";
+      customCity = "";
+      populateCitySelect(cityFilterInput.value);
+      updateAllPreviews();
+      showToast(`City: ${selectedCity}`, "📍");
+    });
+
+    categorySelect.addEventListener('change', (e) => {
+      const found = categories.find(c => c.id === e.target.value);
+      if (found) {
+        selectedCategory = found;
+        document.getElementById('custom-business-input').value = "";
+        customBusiness = "";
+        document.getElementById('pitch-demo-url-input').value = found.url;
+        document.getElementById('open-demo-url-link').href = found.url;
+        renderCategoryGrid();
+        updateAllPreviews();
+        showToast(`Category: ${found.name}`, "🎯");
+      }
+    });
+
+    countryFilterInput.addEventListener('input', (e) => { populateCountrySelect(e.target.value); updateAllPreviews(); });
+    cityFilterInput.addEventListener('input', (e) => { populateCitySelect(e.target.value); updateAllPreviews(); });
+    categoryFilterInput.addEventListener('input', (e) => { populateCategorySelect(e.target.value); renderCategoryGrid(); updateAllPreviews(); });
+
+    document.getElementById('auto-keyword').addEventListener('input', updateDownloadLinksAndFilenameLabels);
+    document.getElementById('auto-location').addEventListener('input', updateDownloadLinksAndFilenameLabels);
+
+    document.querySelectorAll('.quick-country-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedCountry = btn.getAttribute('data-country');
+        countryFilterInput.value = "";
+        populateCountrySelect();
+        const cities = citiesByCountry[selectedCountry] || ["Capital"];
+        selectedCity = cities[0];
+        populateCitySelect();
+        updateAllPreviews();
+        showToast(`Country: ${selectedCountry}`, "🌍");
+      });
+    });
+
+    document.querySelectorAll('.quick-category-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const found = categories.find(c => c.id === btn.getAttribute('data-category'));
+        if (found) {
+          selectedCategory = found;
+          categoryFilterInput.value = "";
+          populateCategorySelect();
+          document.getElementById('pitch-demo-url-input').value = found.url;
+          document.getElementById('open-demo-url-link').href = found.url;
+          renderCategoryGrid();
+          updateAllPreviews();
+          showToast(`Category: ${found.name}`, "🎯");
+        }
+      });
+    });
+
+    document.getElementById('custom-business-input').addEventListener('input', (e) => { customBusiness = e.target.value; updateAllPreviews(); });
+    document.getElementById('custom-city-input').addEventListener('input', (e) => { customCity = e.target.value; updateAllPreviews(); });
+    document.getElementById('pitch-lang-override').addEventListener('change', updateAllPreviews);
+    document.getElementById('pitch-demo-url-input').addEventListener('input', (e) => {
+      document.getElementById('open-demo-url-link').href = e.target.value;
+      updateAllPreviews();
+    });
+    document.getElementById('reset-demo-url-btn').addEventListener('click', () => {
+      document.getElementById('pitch-demo-url-input').value = selectedCategory.url;
+      document.getElementById('open-demo-url-link').href = selectedCategory.url;
+      updateAllPreviews();
+      showToast("Reset to default category link!");
+    });
+
+    document.getElementById('copy-query-btn').onclick = () => { navigator.clipboard.writeText(getSearchQuery()); showToast("Query copied!"); };
+    document.getElementById('copy-url-btn').onclick = () => { navigator.clipboard.writeText(`https://www.google.com/search?q=${encodeURIComponent(getSearchQuery())}`); showToast("URL copied!"); };
+    document.getElementById('copy-pitch-btn').onclick = () => { navigator.clipboard.writeText(document.getElementById('outreach-pitch-textarea').value); showToast("Pitch copied!"); };
+    document.getElementById('copy-english-pitch-btn').onclick = () => { navigator.clipboard.writeText(document.getElementById('outreach-english-preview').textContent); showToast("English Pitch copied!"); };
+    document.getElementById('maps-search-btn').onclick = () => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getSearchQuery())}`, '_blank');
+
+    function extractCountryPart(locationStr) {
+      const parts = (locationStr || "").split(',').map(s => s.trim()).filter(Boolean);
+      return parts.length > 0 ? parts[parts.length - 1] : (locationStr || "Country");
+    }
+
+    function addTargetToQueue(keyword, location, phone_prefix = "", max_leads = 0, size_filter = "") {
+      const kw = (keyword || "").trim() || "gym";
+      const loc = (location || "").trim() || "Delhi, India";
+      const pref = (phone_prefix || "").trim();
+      const maxL = parseInt(max_leads, 10) || 0;
+      const sf = size_filter || document.getElementById('auto-size-filter').value || "all";
+      const country = extractCountryPart(loc);
+
+      batchQueue.push({
+        keyword: kw,
+        location: loc,
+        country: country,
+        phone_prefix: pref,
+        max_leads: maxL,
+        size_filter: sf,
+        status: "pending",
+        count: 0,
+        with_website_count: 0,
+        without_website_count: 0
+      });
+      renderBatchQueue();
+      updateDownloadLinksAndFilenameLabels();
+    }
+
+    function renderBatchQueue(liveTasks = null) {
+      const listEl = document.getElementById('batch-queue-list');
+      const badgeEl = document.getElementById('queue-count-badge');
+      const startLabelEl = document.getElementById('start-scraper-btn-label');
+
+      const itemsToRender = liveTasks && liveTasks.length > 0 ? liveTasks : batchQueue;
+      badgeEl.textContent = `${batchQueue.length} Queued`;
+
+      if (batchQueue.length > 1) {
+        startLabelEl.textContent = `⚡ Start Unlimited Batch Scraper (${batchQueue.length} Targets)`;
+      } else if (batchQueue.length === 1) {
+        startLabelEl.textContent = `⚡ Start Unlimited Python Scraper (1 Queued Target)`;
+      } else {
+        startLabelEl.textContent = `⚡ Start Unlimited Python Scraper`;
+      }
+
+      listEl.innerHTML = "";
+      if (itemsToRender.length === 0) {
+        listEl.innerHTML = `
+          <div class="text-xs text-slate-500 bg-white/80 border border-dashed border-purple-200 rounded-xl p-3 text-center">
+            Queue is empty — click <strong>"➕ Add Above Input to Queue"</strong> or <strong>"➕ Add to Multi-Scraper Queue"</strong> above to add multiple businesses &amp; countries, or click Start directly.
+          </div>
+        `;
+        return;
+      }
+
+      const isParallelMode = (document.getElementById('auto-exec-mode')?.value || 'parallel') === 'parallel';
+
+      itemsToRender.forEach((item, idx) => {
+        const st = item.status || "pending";
+        const tid = item.task_id || (idx + 1);
+        let statusBadge = `<span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">⏳ Queued</span>`;
+        if (st === "running") {
+          statusBadge = `
+            <div class="flex items-center space-x-1.5">
+              <span class="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full animate-pulse">
+                ${isParallelMode ? '⚡ Live Parallel' : '⏳ Running 1-by-1'} (${item.count || 0} leads)
+              </span>
+              <button type="button" data-stop-tid="${tid}" class="stop-one-task-btn text-[10px] font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-300 px-2 py-0.5 rounded-lg cursor-pointer" title="Stop this target only">
+                🛑 Stop Target
+              </button>
+            </div>
+          `;
+        } else if (st === "completed") {
+          statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">✅ Done (${item.count || 0} leads | 🌐 ${item.with_website_count || 0} | ❌ ${item.without_website_count || 0})</span>`;
+        } else if (st === "stopped") {
+          statusBadge = `<span class="bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2 py-0.5 rounded-full">🛑 Stopped (${item.count || 0} leads)</span>`;
+        }
+
+        const prefLabel = item.phone_prefix ? `Prefix: ${item.phone_prefix}` : `All Phones`;
+        const sizeLabel = (item.size_filter && item.size_filter !== "all") ? `Size: ${item.size_filter.toUpperCase()}` : `All Sizes`;
+
+        const row = document.createElement('div');
+        row.className = "bg-white border border-purple-200/80 rounded-xl px-3.5 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-sm";
+        row.innerHTML = `
+          <div class="flex flex-wrap items-center gap-2 text-xs">
+            <span class="w-6 h-6 rounded-lg bg-purple-100 text-purple-800 font-extrabold flex items-center justify-center font-mono">#${idx + 1}</span>
+            <span class="font-extrabold text-slate-900">${item.keyword}</span>
+            <span class="text-slate-400">in</span>
+            <span class="font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">📍 ${item.location}</span>
+            <span class="text-[11px] font-mono text-purple-700 bg-purple-50 px-2 py-0.5 rounded">${prefLabel}</span>
+            <span class="text-[10px] font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded">${sizeLabel}</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            ${statusBadge}
+            ${!liveTasks ? `<button type="button" data-remove-idx="${idx}" class="remove-queue-item-btn text-xs font-bold text-rose-600 hover:bg-rose-50 px-2 py-1 rounded-lg cursor-pointer" title="Remove from queue">✕</button>` : ''}
+          </div>
+        `;
+        listEl.appendChild(row);
+      });
+
+      listEl.querySelectorAll('.stop-one-task-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const tid = btn.getAttribute('data-stop-tid');
+          btn.disabled = true;
+          btn.textContent = "Stopping...";
+          showToast(`Target #${tid} stopping...`, "🛑");
+          try {
+            await fetch(`${BACKEND_URL}/api/stop-task/${tid}`, { method: 'POST' });
+          } catch (e) {}
+        });
+      });
+
+      listEl.querySelectorAll('.remove-queue-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const rIdx = parseInt(btn.getAttribute('data-remove-idx'), 10);
+          batchQueue.splice(rIdx, 1);
+          renderBatchQueue();
+          updateDownloadLinksAndFilenameLabels();
+          showToast("Removed target from queue", "🗑️");
+        });
+      });
+    }
+
+    function renderPerTaskDownloads(tasksList) {
+      const wrapper = document.getElementById('per-task-downloads-wrapper');
+      const listEl = document.getElementById('per-task-downloads-list');
+      const zipLink = document.getElementById('dl-batch-zip');
+      if (zipLink) {
+        zipLink.href = `${BACKEND_URL}/download-batch-zip?t=${Date.now()}`;
+      }
+
+      if (!tasksList || tasksList.length === 0) {
+        wrapper.classList.add('hidden');
+        return;
+      }
+
+      wrapper.classList.remove('hidden');
+      listEl.innerHTML = "";
+
+      tasksList.forEach(t => {
+        const tid = t.task_id;
+        const bizClean = cleanPart(t.keyword);
+        const locClean = cleanPart(t.location);
+        const qs = `?task_id=${tid}&biz=${encodeURIComponent(bizClean)}&country=${encodeURIComponent(locClean)}&t=${Date.now()}`;
+
+        const card = document.createElement('div');
+        card.className = "bg-white border border-indigo-200 rounded-xl p-3 flex flex-col lg:flex-row lg:items-center justify-between gap-2 text-xs shadow-sm";
+        card.innerHTML = `
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-purple-600 text-white font-mono font-bold px-2 py-0.5 rounded-md">#${tid}</span>
+            <span class="font-extrabold text-slate-900">${t.keyword}</span>
+            <span class="text-slate-400">in</span>
+            <span class="font-bold text-indigo-700">${t.location}</span>
+            <span class="text-[11px] text-slate-600 font-medium">
+              (Total: <strong>${t.count || 0}</strong> | 🌐 With Web: <strong class="text-emerald-700">${t.with_website_count || 0}</strong> | ❌ No Web: <strong class="text-rose-700">${t.without_website_count || 0}</strong>)
+            </span>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <a href="${BACKEND_URL}/download/with_website/pdf${qs}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-2.5 py-1.5 rounded-lg">
+              📄 With Web PDF
+            </a>
+            <a href="${BACKEND_URL}/download/without_website/pdf${qs}" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-2.5 py-1.5 rounded-lg">
+              📄 Without Web PDF
+            </a>
+            <a href="${BACKEND_URL}/download/with_website/excel${qs}" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold px-2.5 py-1.5 rounded-lg">
+              📥 With Web .xlsx
+            </a>
+            <a href="${BACKEND_URL}/download/without_website/excel${qs}" class="bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 font-bold px-2.5 py-1.5 rounded-lg">
+              📥 Without Web .xlsx
+            </a>
+            <a href="${BACKEND_URL}/download/all/excel${qs}" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 font-bold px-2.5 py-1.5 rounded-lg">
+              📥 All (${t.count || 0}) .xlsx
+            </a>
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    function updateTaskFilterDropdown(tasksList) {
+      const sel = document.getElementById('task-filter-select');
+      const prevVal = sel.value || "all_tasks";
+      sel.innerHTML = `<option value="all_tasks">🌍 All Targets Combined (${scrapedDataStore.all.length} Leads)</option>`;
+      if (tasksList && tasksList.length > 0) {
+        tasksList.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = String(t.task_id);
+          opt.textContent = `#${t.task_id}: ${t.keyword} in ${t.location} (${t.count || 0} leads)`;
+          sel.appendChild(opt);
+        });
+      }
+      if (Array.from(sel.options).some(o => o.value === prevVal)) {
+        sel.value = prevVal;
+      } else {
+        sel.value = "all_tasks";
+        currentTaskFilter = "all_tasks";
+      }
+    }
+
+    function getSizeBadgeHtml(sizeStr, reviewsCount, ratingStr) {
+      const sz = (sizeStr || "Small").trim();
+      const rev = reviewsCount || 0;
+      const rat = ratingStr && ratingStr !== "N/A" ? `⭐ ${ratingStr} • ` : "";
+      if (sz === "Large") {
+        return `<span class="bg-purple-100 text-purple-900 border border-purple-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full whitespace-nowrap">🏢 Large (${rat}${rev} rev)</span>`;
+      } else if (sz === "Medium") {
+        return `<span class="bg-blue-100 text-blue-900 border border-blue-300 text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">🏬 Medium (${rat}${rev} rev)</span>`;
+      } else {
+        return `<span class="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap">🏪 Small (${rat}${rev} rev)</span>`;
+      }
+    }
+
+    function renderLeadsTable(filterKey) {
+      currentTabFilter = filterKey;
+      const tbody = document.getElementById('scraped-results-tbody');
+      tbody.innerHTML = "";
+      let rows = scrapedDataStore[filterKey] || [];
+
+      if (currentTaskFilter !== "all_tasks") {
+        const tidNum = parseInt(currentTaskFilter, 10);
+        rows = rows.filter(r => r["Task ID"] === tidNum);
+      }
+
+      if (currentSizeFilter !== "all_sizes") {
+        rows = rows.filter(r => (r["Business Size"] || "Small") === currentSizeFilter);
+      }
+
+      rows.forEach((row, idx) => {
+        const hasWeb = row["Has Website"] === "Yes";
+        const targetBadge = row["Search Target"] || `${document.getElementById('auto-keyword').value} in ${document.getElementById('auto-location').value}`;
+        const mapsPhone = row["Google Maps Phone"] || row["Phone"] || "N/A";
+        const webPhone = row["Website Extracted Phone"] || row["Website Phones"] || "N/A";
+        const sizeBadge = getSizeBadgeHtml(row["Business Size"], row["Reviews"], row["Rating"]);
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50";
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-mono text-slate-400">${idx + 1}</td>
+          <td class="py-2.5 px-3">
+            <span class="bg-indigo-50 text-indigo-800 border border-indigo-200 text-[10px] font-bold px-2 py-0.5 rounded-md">${targetBadge}</span>
+          </td>
+          <td class="py-2.5 px-3 font-bold text-slate-800">${row["Business Name"] || "N/A"}</td>
+          <td class="py-2.5 px-3">${sizeBadge}</td>
+          <td class="py-2.5 px-3 font-mono font-semibold text-purple-700">${mapsPhone}</td>
+          <td class="py-2.5 px-3 font-mono font-semibold text-emerald-700">${webPhone}</td>
+          <td class="py-2.5 px-3">
+            ${hasWeb 
+              ? '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">🌐 Website Added</span>' 
+              : '<span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">❌ No Website</span>'}
+          </td>
+          <td class="py-2.5 px-3 text-blue-600 truncate max-w-[180px]">
+            ${hasWeb ? `<a href="${row["Website"]}" target="_blank" class="hover:underline font-medium">${row["Website"]}</a>` : '<span class="text-slate-400">N/A</span>'}
+          </td>
+          <td class="py-2.5 px-3 font-mono text-emerald-700 font-semibold">${row["Email"] || "N/A"}</td>
+          <td class="py-2.5 px-3 text-slate-500 truncate max-w-[200px]">${row["Address"] || "N/A"}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateCountersAndTable(resultObj) {
+      scrapedDataStore.all = resultObj.data || [];
+      scrapedDataStore.with_website = resultObj.with_website || [];
+      scrapedDataStore.without_website = resultObj.without_website || [];
+      scrapedDataStore.tasks = resultObj.tasks || [];
+
+      document.getElementById('with-web-count-badge').textContent = resultObj.with_website_count || 0;
+      document.getElementById('without-web-count-badge').textContent = resultObj.without_website_count || 0;
+      document.getElementById('tab-count-all').textContent = resultObj.count || 0;
+      document.getElementById('tab-count-with').textContent = resultObj.with_website_count || 0;
+      document.getElementById('tab-count-without').textContent = resultObj.without_website_count || 0;
+
+      updateDownloadLinksAndFilenameLabels();
+      if (resultObj.tasks && resultObj.tasks.length > 0) {
+        renderBatchQueue(resultObj.tasks);
+        renderPerTaskDownloads(resultObj.tasks);
+        updateTaskFilterDropdown(resultObj.tasks);
+      }
+
+      document.getElementById('dual-reports-download-section').classList.remove('hidden');
+      document.getElementById('scraped-results-container').classList.remove('hidden');
+      renderLeadsTable(currentTabFilter);
+    }
+
+    document.getElementById('task-filter-select').addEventListener('change', (e) => {
+      currentTaskFilter = e.target.value;
+      renderLeadsTable(currentTabFilter);
+    });
+
+    document.getElementById('table-size-filter-select').addEventListener('change', (e) => {
+      currentSizeFilter = e.target.value;
+      renderLeadsTable(currentTabFilter);
+    });
+
+    document.querySelectorAll('.lead-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.lead-tab-btn').forEach(b => {
+          b.className = "lead-tab-btn text-xs font-semibold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg cursor-pointer";
+        });
+        btn.className = "lead-tab-btn text-xs font-bold bg-purple-600 text-white px-3 py-1.5 rounded-lg cursor-pointer";
+        renderLeadsTable(btn.getAttribute('data-filter'));
+      });
+    });
+
+    document.getElementById('sync-from-top-btn').onclick = () => {
+      syncAutomationInputs();
+      showToast("Synced with top search filter!", "🔄");
+    };
+
+    document.getElementById('add-top-to-queue-btn').addEventListener('click', () => {
+      const biz = customBusiness.trim() || (selectedCategory ? selectedCategory.queryName : "zym");
+      const city = customCity.trim() || (selectedCity && selectedCity !== "All Cities" ? selectedCity : "");
+      const loc = city ? `${city}, ${selectedCountry}` : selectedCountry;
+      const pref = document.getElementById('auto-phone-prefix').value.trim();
+      const maxL = document.getElementById('auto-max-leads').value;
+      const sf = document.getElementById('auto-size-filter').value;
+      addTargetToQueue(biz, loc, pref, maxL, sf);
+      showToast(`Added "${biz} in ${loc}" to Queue! (${batchQueue.length} total)`, "➕");
+    });
+
+    document.getElementById('add-to-queue-btn').addEventListener('click', () => {
+      const kw = document.getElementById('auto-keyword').value.trim() || "zym";
+      const loc = document.getElementById('auto-location').value.trim() || "Delhi, India";
+      const pref = document.getElementById('auto-phone-prefix').value.trim();
+      const maxL = document.getElementById('auto-max-leads').value;
+      const sf = document.getElementById('auto-size-filter').value;
+      addTargetToQueue(kw, loc, pref, maxL, sf);
+      showToast(`Added "${kw} in ${loc}" to Queue! (${batchQueue.length} total)`, "➕");
+    });
+
+    document.getElementById('load-example-queue-btn').addEventListener('click', () => {
+      addTargetToQueue("Hospital", "Delhi, India", "", 0, "all");
+      addTargetToQueue("Gym", "Asunción, Paraguay", "", 0, "all");
+      showToast("Added Delhi Hospital + Paraguay Gym to Queue!", "⚡");
+    });
+
+    document.getElementById('toggle-bulk-box-btn').addEventListener('click', () => {
+      const box = document.getElementById('bulk-paste-box');
+      box.classList.toggle('hidden');
+    });
+
+    document.getElementById('add-bulk-targets-btn').addEventListener('click', () => {
+      const raw = document.getElementById('bulk-targets-input').value.trim();
+      if (!raw) {
+        showToast("Please enter at least one line to add!", "⚠️");
+        return;
+      }
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const defaultPref = document.getElementById('auto-phone-prefix').value.trim();
+      const defaultMax = document.getElementById('auto-max-leads').value;
+      const defaultSf = document.getElementById('auto-size-filter').value;
+      let addedCount = 0;
+
+      lines.forEach(line => {
+        if (line.includes('|')) {
+          const parts = line.split('|').map(p => p.trim());
+          const kw = parts[0] || "gym";
+          const loc = parts[1] || "Delhi, India";
+          const pref = parts[2] !== undefined ? parts[2] : defaultPref;
+          addTargetToQueue(kw, loc, pref, defaultMax, defaultSf);
+          addedCount++;
+        } else if (/\bin\b/i.test(line)) {
+          const match = line.match(/^(.*?)\s+in\s+(.+)$/i);
+          if (match) {
+            addTargetToQueue(match[1].trim(), match[2].trim(), defaultPref, defaultMax, defaultSf);
+            addedCount++;
+          }
+        } else {
+          addTargetToQueue(line, document.getElementById('auto-location').value.trim() || "Delhi, India", defaultPref, defaultMax, defaultSf);
+          addedCount++;
+        }
+      });
+
+      document.getElementById('bulk-targets-input').value = "";
+      document.getElementById('bulk-paste-box').classList.add('hidden');
+      showToast(`Added ${addedCount} targets to Unlimited Queue!`, "🚀");
+    });
+
+    document.getElementById('clear-queue-btn').addEventListener('click', () => {
+      batchQueue = [];
+      renderBatchQueue();
+      updateDownloadLinksAndFilenameLabels();
+      showToast("Cleared Multi-Business Queue", "🗑️");
+    });
+
+    const startBtn = document.getElementById('start-scraper-btn');
+    const skipTaskBtn = document.getElementById('skip-task-btn');
+    const stopBtn = document.getElementById('stop-scraper-btn');
+    const statusDiv = document.getElementById('scraper-status');
+
+    function startProgressPolling() {
+      if (progressTimer) clearInterval(progressTimer);
+      progressTimer = setInterval(async () => {
+        try {
+          const res = await fetch(`${BACKEND_URL}/api/scraper-progress`);
+          const prog = await res.json();
+          if (prog.running) {
+            const isParallel = (document.getElementById('auto-exec-mode')?.value || 'parallel') === 'parallel';
+            const visitWeb = document.getElementById('auto-visit-web')?.value === 'true';
+            statusDiv.textContent = `Status: ${isParallel ? '⚡ Scraping in Parallel (Ek Sath)' : '🔄 Scraping One-by-One (Sequential)'} [Website Visit: ${visitWeb ? 'ON' : 'OFF'}]... Total Leads: ${prog.count} (🌐 With Web: ${prog.with_website_count} | ❌ No Web: ${prog.without_website_count}).`;
+            updateCountersAndTable(prog);
+          }
+        } catch (e) {}
+      }, 2000);
+    }
+
+    function stopProgressPolling() {
+      if (progressTimer) {
+        clearInterval(progressTimer);
+        progressTimer = null;
+      }
+    }
+
+    function triggerBothPdfsDownload(isMultiBatch = false) {
+      if (isMultiBatch) {
+        const aZip = document.createElement('a');
+        aZip.href = `${BACKEND_URL}/download-batch-zip?t=${Date.now()}`;
+        aZip.download = `All_Multi_Business_Leads_Reports.zip`;
+        document.body.appendChild(aZip);
+        aZip.click();
+        document.body.removeChild(aZip);
+        return;
+      }
+
+      const { biz, country } = getActiveBizAndCountry();
+      const queryParams = `?biz=${encodeURIComponent(biz)}&country=${encodeURIComponent(country)}&t=${Date.now()}`;
+
+      const a1 = document.createElement('a');
+      a1.href = `${BACKEND_URL}/download/with_website/pdf${queryParams}`;
+      a1.download = `${biz}_${country}_With_Website.pdf`;
+      document.body.appendChild(a1);
+      a1.click();
+      document.body.removeChild(a1);
+
+      setTimeout(() => {
+        const a2 = document.createElement('a');
+        a2.href = `${BACKEND_URL}/download/without_website/pdf${queryParams}`;
+        a2.download = `${biz}_${country}_Without_Website.pdf`;
+        document.body.appendChild(a2);
+        a2.click();
+        document.body.removeChild(a2);
+      }, 700);
+    }
+
+    skipTaskBtn.addEventListener('click', async () => {
+      statusDiv.textContent = `Status: ⏭️ Finishing current business target and jumping to the next business in queue...`;
+      showToast("Moving to next in queue...", "⏭️");
+      try {
+        await fetch(`${BACKEND_URL}/api/skip-current-task`, { method: 'POST' });
+      } catch (e) {}
+    });
+
+    stopBtn.addEventListener('click', async () => {
+      stopBtn.disabled = true;
+      stopBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      skipTaskBtn.disabled = true;
+      skipTaskBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      statusDiv.textContent = `Status: 🛑 Stopping scraper and generating individual & master PDF/Excel reports...`;
+      showToast("Stopping & Generating All Reports...", "🛑");
+
+      try {
+        await fetch(`${BACKEND_URL}/api/stop-automation`, { method: 'POST' });
+      } catch (e) {}
+    });
+
+    startBtn.addEventListener('click', async () => {
+      const keyword = document.getElementById('auto-keyword').value.trim() || 'zym';
+      const location = document.getElementById('auto-location').value.trim() || 'Delhi, India';
+      const phone_prefix = document.getElementById('auto-phone-prefix').value.trim();
+      const size_filter = document.getElementById('auto-size-filter').value || 'all';
+      const max_leads_per_task = parseInt(document.getElementById('auto-max-leads').value, 10) || 0;
+      const visit_website = document.getElementById('auto-visit-web').value === 'true';
+      const headless = document.getElementById('auto-headless').value === 'true';
+      const parallel = (document.getElementById('auto-exec-mode')?.value || 'parallel') === 'parallel';
+      const concurrency = parseInt(document.getElementById('auto-concurrency')?.value || '3', 10) || 3;
+      const { country } = getActiveBizAndCountry();
+
+      const tasksPayload = batchQueue.length > 0
+        ? batchQueue.map(t => ({
+            keyword: t.keyword,
+            location: t.location,
+            country: t.country,
+            phone_prefix: t.phone_prefix,
+            max_leads: t.max_leads || max_leads_per_task,
+            size_filter: t.size_filter || size_filter
+          }))
+        : [{
+            keyword,
+            location,
+            country,
+            phone_prefix,
+            max_leads: max_leads_per_task,
+            size_filter
+          }];
+
+      updateDownloadLinksAndFilenameLabels();
+
+      statusDiv.classList.remove('hidden');
+      if (tasksPayload.length > 1) {
+        statusDiv.textContent = `Status: ${parallel ? '⚡ Launching PARALLEL Scraper' : '⏳ Launching Sequential Scraper'} for ${tasksPayload.length} Targets (Website Visit: ${visit_website ? 'ON' : 'OFF'})...`;
+      } else {
+        statusDiv.textContent = `Status: ⏳ Launching Scraper for "${tasksPayload[0].keyword} in ${tasksPayload[0].location}" (Size Filter: ${size_filter.toUpperCase()})...`;
+      }
+
+      startBtn.disabled = true;
+      startBtn.classList.add('opacity-60', 'cursor-not-allowed');
+      stopBtn.disabled = false;
+      stopBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      skipTaskBtn.disabled = false;
+      skipTaskBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      startProgressPolling();
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/run-automation`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            keyword,
+            location,
+            country,
+            headless,
+            phone_prefix,
+            visit_website,
+            size_filter,
+            max_leads_per_task,
+            parallel,
+            concurrency,
+            tasks: tasksPayload
+          })
+        });
+        const result = await response.json();
+        stopProgressPolling();
+
+        if (result.status === 'success') {
+          updateCountersAndTable(result);
+
+          if (result.stopped) {
+            statusDiv.textContent = `Status: 🛑 Stopped by User! Saved ${result.count} Leads. Auto-downloading reports...`;
+            showToast(`Stopped! Downloading Reports`, "📄");
+            triggerBothPdfsDownload(result.is_multi);
+          } else {
+            statusDiv.textContent = `Status: ✅ Batch Complete! Total Leads: ${result.count} | 🌐 With Website: ${result.with_website_count} | ❌ Without Website: ${result.without_website_count}`;
+            showToast(`Extracted ${result.count} leads!`, "🎉");
+          }
+        } else {
+          statusDiv.textContent = `Status: ❌ Error - ${result.message}`;
+        }
+      } catch (err) {
+        stopProgressPolling();
+        statusDiv.textContent = `Status: ❌ Failed to connect to Python backend at ${BACKEND_URL}. Make sure "python app.py" is running!`;
+      } finally {
+        startBtn.disabled = false;
+        startBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+        stopBtn.disabled = true;
+        stopBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        skipTaskBtn.disabled = true;
+        skipTaskBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    });
+
+    renderBatchQueue();
+    populateCountrySelect();
+    populateCitySelect();
+    populateCategorySelect();
+    renderCategoryGrid();
+    updateAllPreviews();
+
+    setInterval(() => {
+      document.getElementById('live-clock-time').textContent = new Date().toLocaleTimeString();
+      document.getElementById('live-clock-date').textContent = new Date().toDateString();
+    }, 1000);
+  </script>
+</body>
+</html>
