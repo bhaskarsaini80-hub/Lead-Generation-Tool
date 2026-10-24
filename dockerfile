@@ -11,7 +11,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install chromium --with-deps
-
+RUN playwright install --with-deps
 COPY . .
 
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:10000"]
