@@ -11,6 +11,7 @@ os.makedirs(STATIC_DIR, exist_ok=True)
 app = Flask(__name__)
 
 ACTIVE_SCRAPER = None
+LAST_RESULTS = None
 
 
 def sanitize_part(text):
@@ -23,9 +24,9 @@ def sanitize_part(text):
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
     response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     return response
 
@@ -39,27 +40,41 @@ def index():
     return "Error: index.html file nahi mili!", 404
 
 
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok", "message": "Backend is running on Render!"}), 200
+
+
 @app.route('/api/run-automation', methods=['POST', 'OPTIONS'])
 def run_automation():
-    global ACTIVE_SCRAPER
+    global ACTIVE_SCRAPER, LAST_RESULTS
     if request.method == 'OPTIONS':
         return jsonify({"status": "ok"}), 200
 
-    # Clear old static report files before starting a new batch
+    # Agar pehle se koi scraper chal raha hai toh usey rokein
+    if ACTIVE_SCRAPER is not None:
+        try:
+            ACTIVE_SCRAPER.request_stop()
+        except Exception:
+            pass
+
+    # Purani report files saaf karein
     for f in os.listdir(STATIC_DIR):
         if f.endswith(('.xlsx', '.pdf', '.zip')):
             try:
                 os.remove(os.path.join(STATIC_DIR, f))
-            except:
+            except Exception:
                 pass
 
     data = request.json or {}
     tasks = data.get('tasks', [])
 
-    headless = data.get('headless', False)
+    # Render par hamesha headless=True aur safe concurrency (max 2) rakhein
+    headless = True
     visit_website = data.get('visit_website', True)
-    parallel = data.get('parallel', True)
-    concurrency = int(data.get('concurrency', 3) or 3)
+    parallel = data.get('parallel', False)
+    raw_conc = int(data.get('concurrency', 1) or 1)
+    concurrency = min(2, max(1, raw_conc))
     max_leads_per_task = int(data.get('max_leads_per_task', 0) or 0)
     size_filter = data.get('size_filter', 'all')
 
@@ -97,9 +112,8 @@ def run_automation():
 
         was_stopped = grouped.get("stopped", False)
         total_tasks = len(tasks)
-        ACTIVE_SCRAPER = None
 
-        return jsonify({
+        LAST_RESULTS = {
             "status": "success",
             "stopped": was_stopped,
             "is_multi": total_tasks > 1,
@@ -111,7 +125,10 @@ def run_automation():
             "with_website": grouped["with_website"],
             "without_website": grouped["without_website"],
             "tasks": grouped.get("tasks_meta", [])
-        })
+        }
+        ACTIVE_SCRAPER = None
+        return jsonify(LAST_RESULTS)
+
     except Exception as e:
         ACTIVE_SCRAPER = None
         print(f"[!] Backend Error: {e}")
@@ -153,7 +170,7 @@ def stop_single_task(task_id):
 
 @app.route('/api/scraper-progress', methods=['GET'])
 def scraper_progress():
-    global ACTIVE_SCRAPER
+    global ACTIVE_SCRAPER, LAST_RESULTS
     if ACTIVE_SCRAPER is not None:
         meta = ACTIVE_SCRAPER.get_tasks_meta_progress()
         return jsonify({
@@ -168,6 +185,11 @@ def scraper_progress():
             "with_website": ACTIVE_SCRAPER.with_website,
             "without_website": ACTIVE_SCRAPER.without_website,
             "tasks": meta["tasks"]
+        })
+    elif LAST_RESULTS is not None:
+        return jsonify({
+            "running": False,
+            **LAST_RESULTS
         })
     return jsonify({"running": False})
 
@@ -195,7 +217,7 @@ def download_report(category, file_type):
             return send_file(file_path, as_attachment=True, download_name=download_name)
 
     master_filename = f"leads_{cat_key}.{ext}"
-    master_path = os.path.join(STATIC_DIR, master_filename)
+    master_path = os.path.join(BASE_DIR, 'static', master_filename)
     if os.path.exists(master_path):
         return send_file(master_path, as_attachment=True, download_name=f"{biz}_{country}_{readable_suffix}.{ext}")
 
@@ -217,8 +239,8 @@ def download_batch_zip():
 
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 10000))
     print("====================================================")
-    print("Server Chalu Ho Gaya Hai! Business Size + Multi-Queue Ready!")
-    print("Browser mein yeh link kholein: http://127.0.0.1:5000")
+    print(f"Server Chalu Ho Gaya Hai on Port {port}!")
     print("====================================================")
-    app.run(debug=True, threaded=True, host='127.0.0.1', port=5000)
+    app.run(debug=False, threaded=True, host='0.0.0.0', port=port)
